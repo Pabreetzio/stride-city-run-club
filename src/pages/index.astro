@@ -71,8 +71,8 @@ const recentPosts = (await getCollection('blog'))
 
 	/* ── Animations ── */
 	@keyframes slideFromLeft {
-		from { transform: translateX(-70px); opacity: 0; }
-		to   { transform: translateX(0);     opacity: 1; }
+		from { transform: translateX(-100vw); opacity: 0; }
+		to   { transform: translateX(0);      opacity: 1; }
 	}
 
 	/* ── Hero ── */
@@ -87,7 +87,7 @@ const recentPosts = (await getCollection('blog'))
 		background-size: cover;
 		background-position: center;
 		color: #fff;
-		overflow: hidden;
+		overflow: hidden; /* clips sliding text before it enters */
 	}
 	/* dark overlay so text stays readable */
 	.hero::before {
