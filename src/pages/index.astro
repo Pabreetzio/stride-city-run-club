@@ -21,8 +21,7 @@ const recentPosts = (await getCollection('blog'))
 
 		<section class="hero">
 			<div class="hero-inner">
-				<p class="hero-eyebrow">Community · Movement · City</p>
-				<h1>Run Together.<br />Go Further.</h1>
+				<h1><span class="accent">Running</span> Together,<br />Building Community</h1>
 				<p class="hero-sub">
 					Stride City Run Club meets weekly for group runs across the city.
 					All paces welcome — show up and move.
@@ -70,36 +69,61 @@ const recentPosts = (await getCollection('blog'))
 		background: #fff;
 	}
 
-	/* Hero */
+	/* ── Animations ── */
+	@keyframes slideFromLeft {
+		from { transform: translateX(-70px); opacity: 0; }
+		to   { transform: translateX(0);     opacity: 1; }
+	}
+
+	/* ── Hero ── */
 	.hero {
-		background: rgb(var(--black));
+		position: relative;
+		min-height: calc(100vh - 94px); /* 34px topbar + 60px nav */
+		display: flex;
+		align-items: flex-start;
+		padding: 0 1.5em;
+		padding-top: calc((100vh - 94px) * 0.28); /* land content at ~1/3 */
+		background-image: url('/hero-bg.jpg');
+		background-size: cover;
+		background-position: center;
 		color: #fff;
-		padding: 6em 1.5em 5em;
+		overflow: hidden;
+	}
+	/* dark overlay so text stays readable */
+	.hero::before {
+		content: '';
+		position: absolute;
+		inset: 0;
+		background: linear-gradient(
+			160deg,
+			rgba(0, 0, 0, 0.62) 0%,
+			rgba(0, 0, 0, 0.45) 55%,
+			rgba(0, 0, 0, 0.55) 100%
+		);
 	}
 	.hero-inner {
-		max-width: 700px;
-		margin: 0 auto;
-	}
-	.hero-eyebrow {
-		font-size: 0.8rem;
-		letter-spacing: 0.15em;
-		text-transform: uppercase;
-		color: var(--accent);
-		margin: 0 0 1em;
-		font-weight: 700;
+		position: relative;
+		max-width: 680px;
 	}
 	.hero h1 {
 		color: #fff;
-		font-size: clamp(2.5rem, 6vw, 4rem);
+		font-size: clamp(2.4rem, 5.5vw, 3.8rem);
 		line-height: 1.1;
 		margin: 0 0 0.6em;
+		animation: slideFromLeft 0.75s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+	}
+	.hero h1 .accent {
+		color: var(--accent);
 	}
 	.hero-sub {
 		font-size: 1.1rem;
-		color: rgba(255, 255, 255, 0.75);
-		max-width: 520px;
+		color: rgba(255, 255, 255, 0.8);
+		max-width: 500px;
 		line-height: 1.6;
 		margin: 0 0 2em;
+		opacity: 0;
+		animation: slideFromLeft 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+		animation-delay: 0.3s;
 	}
 	.btn-primary {
 		display: inline-block;

@@ -66,9 +66,9 @@ import HeaderLink from './HeaderLink.astro';
 
 	/* ── Topbar ── */
 	.topbar {
-		background: #0a0c10;
+		background: var(--accent);
 		padding: 0 1.5em;
-		border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+		border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 	}
 	.topbar-inner {
 		display: flex;
@@ -83,7 +83,7 @@ import HeaderLink from './HeaderLink.astro';
 		align-items: center;
 		gap: 0.6em;
 		font-size: 0.72rem;
-		color: rgba(255, 255, 255, 0.55);
+		color: rgba(0, 0, 0, 0.75);
 		letter-spacing: 0.03em;
 	}
 	.topbar-item {
@@ -93,7 +93,7 @@ import HeaderLink from './HeaderLink.astro';
 	}
 	.topbar-pipe {
 		font-weight: 700;
-		color: rgba(255, 255, 255, 0.25);
+		color: rgba(0, 0, 0, 0.3);
 		line-height: 1;
 	}
 	.topbar-social {
@@ -104,12 +104,12 @@ import HeaderLink from './HeaderLink.astro';
 	.topbar-social a {
 		display: flex;
 		align-items: center;
-		color: rgba(255, 255, 255, 0.45);
+		color: rgba(0, 0, 0, 0.55);
 		text-decoration: none;
 		transition: color 0.15s;
 	}
 	.topbar-social a:hover {
-		color: var(--accent);
+		color: rgb(var(--black));
 	}
 
 	/* ── Main nav ── */
