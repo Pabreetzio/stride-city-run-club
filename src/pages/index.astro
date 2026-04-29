@@ -28,7 +28,7 @@ const recentPosts = (await getCollection('blog'))
 						Join us every Wednesday night at Edge City Brewery at 6:30pm. All ages and fitness levels welcome, walk or run. The route is two miles.
 					</p>
 				</div>
-				<a href="/runs" class="btn-primary">See Upcoming Runs</a>
+				{/* <a href="/runs" class="btn-primary">See Upcoming Runs</a> */}
 			</div>
 		</section>
 
@@ -78,6 +78,7 @@ const recentPosts = (await getCollection('blog'))
 			</div>
 		</section>
 
+		{/* Latest News section — uncomment when blog/news is ready
 		{recentPosts.length > 0 && (
 			<section class="news">
 				<div class="container">
@@ -96,6 +97,7 @@ const recentPosts = (await getCollection('blog'))
 				</div>
 			</section>
 		)}
+		*/}
 
 		<Footer />
 	</body>
