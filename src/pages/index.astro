@@ -1,8 +1,14 @@
 ---
+import { getCollection } from 'astro:content';
 import BaseHead from '../components/BaseHead.astro';
 import Footer from '../components/Footer.astro';
+import FormattedDate from '../components/FormattedDate.astro';
 import Header from '../components/Header.astro';
 import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
+
+const recentPosts = (await getCollection('blog'))
+	.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+	.slice(0, 3);
 ---
 
 <!doctype html>
@@ -12,38 +18,179 @@ import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
 	</head>
 	<body>
 		<Header />
-		<main>
-			<h1>🧑‍🚀 Hello, Astronaut!</h1>
-			<p>
-				Welcome to the official <a href="https://astro.build/">Astro</a> blog starter template. This template
-				serves as a lightweight, minimally-styled starting point for anyone looking to build a personal
-				website, blog, or portfolio with Astro.
-			</p>
-			<p>
-				This template comes with a few integrations already configured in your
-				<code>astro.config.mjs</code> file. You can customize your setup with
-				<a href="https://astro.build/integrations">Astro Integrations</a> to add tools like Tailwind,
-				React, or Vue to your project.
-			</p>
-			<p>Here are a few ideas on how to get started with the template:</p>
-			<ul>
-				<li>Edit this page in <code>src/pages/index.astro</code></li>
-				<li>Edit the site header items in <code>src/components/Header.astro</code></li>
-				<li>Add your name to the footer in <code>src/components/Footer.astro</code></li>
-				<li>Check out the included blog posts in <code>src/content/blog/</code></li>
-				<li>Customize the blog post page layout in <code>src/layouts/BlogPost.astro</code></li>
-			</ul>
-			<p>
-				Have fun! If you get stuck, remember to
-				<a href="https://docs.astro.build/">read the docs</a>
-				or <a href="https://astro.build/chat">join us on Discord</a> to ask questions.
-			</p>
-			<p>
-				Looking for a blog template with a bit more personality? Check out
-				<a href="https://github.com/Charca/astro-blog-template">astro-blog-template</a>
-				by <a href="https://twitter.com/Charca">Maxi Ferreira</a>.
-			</p>
-		</main>
+
+		<section class="hero">
+			<div class="hero-inner">
+				<p class="hero-eyebrow">Community · Movement · City</p>
+				<h1>Run Together.<br />Go Further.</h1>
+				<p class="hero-sub">
+					Stride City Run Club meets weekly for group runs across the city.
+					All paces welcome — show up and move.
+				</p>
+				<a href="/runs" class="btn-primary">See Upcoming Runs</a>
+			</div>
+		</section>
+
+		<section class="about-strip">
+			<div class="container">
+				<h2>Who We Are</h2>
+				<p>
+					We're a community of runners who believe the best miles are shared ones.
+					Whether you're chasing a PR or just looking for a reason to get outside,
+					there's a place for you here.
+				</p>
+			</div>
+		</section>
+
+		{recentPosts.length > 0 && (
+			<section class="news">
+				<div class="container">
+					<h2>Latest News</h2>
+					<ul class="post-list">
+						{recentPosts.map((post) => (
+							<li>
+								<a href={`/blog/${post.id}/`}>
+									<span class="post-title">{post.data.title}</span>
+									<span class="post-date"><FormattedDate date={post.data.pubDate} /></span>
+								</a>
+							</li>
+						))}
+					</ul>
+					<a href="/blog" class="btn-secondary">All Posts</a>
+				</div>
+			</section>
+		)}
+
 		<Footer />
 	</body>
 </html>
+
+<style>
+	body {
+		background: #fff;
+	}
+
+	/* Hero */
+	.hero {
+		background: rgb(var(--black));
+		color: #fff;
+		padding: 6em 1.5em 5em;
+	}
+	.hero-inner {
+		max-width: 700px;
+		margin: 0 auto;
+	}
+	.hero-eyebrow {
+		font-size: 0.8rem;
+		letter-spacing: 0.15em;
+		text-transform: uppercase;
+		color: var(--accent);
+		margin: 0 0 1em;
+		font-weight: 700;
+	}
+	.hero h1 {
+		color: #fff;
+		font-size: clamp(2.5rem, 6vw, 4rem);
+		line-height: 1.1;
+		margin: 0 0 0.6em;
+	}
+	.hero-sub {
+		font-size: 1.1rem;
+		color: rgba(255, 255, 255, 0.75);
+		max-width: 520px;
+		line-height: 1.6;
+		margin: 0 0 2em;
+	}
+	.btn-primary {
+		display: inline-block;
+		background: var(--accent);
+		color: #fff;
+		padding: 0.75em 1.75em;
+		border-radius: 4px;
+		text-decoration: none;
+		font-weight: 700;
+		font-size: 0.95rem;
+		letter-spacing: 0.03em;
+		transition: background 0.15s;
+	}
+	.btn-primary:hover {
+		background: var(--accent-dark);
+		color: #fff;
+	}
+
+	/* About strip */
+	.about-strip {
+		padding: 4em 1.5em;
+		border-bottom: 1px solid rgb(var(--gray-light));
+	}
+	.container {
+		max-width: 700px;
+		margin: 0 auto;
+	}
+	.about-strip h2 {
+		font-size: 1.75rem;
+		margin-bottom: 0.75em;
+	}
+	.about-strip p {
+		font-size: 1.05rem;
+		color: rgb(var(--gray-dark));
+		line-height: 1.7;
+		margin: 0;
+	}
+
+	/* News */
+	.news {
+		padding: 4em 1.5em;
+	}
+	.news h2 {
+		font-size: 1.75rem;
+		margin-bottom: 1.25em;
+	}
+	.post-list {
+		list-style: none;
+		margin: 0 0 2em;
+		padding: 0;
+		display: flex;
+		flex-direction: column;
+		gap: 0;
+	}
+	.post-list li a {
+		display: flex;
+		justify-content: space-between;
+		align-items: baseline;
+		gap: 1em;
+		padding: 0.9em 0;
+		border-bottom: 1px solid rgb(var(--gray-light));
+		text-decoration: none;
+		color: rgb(var(--black));
+		transition: color 0.15s;
+	}
+	.post-list li a:hover .post-title {
+		color: var(--accent);
+	}
+	.post-title {
+		font-weight: 600;
+		font-size: 1rem;
+	}
+	.post-date {
+		font-size: 0.85rem;
+		color: rgb(var(--gray));
+		white-space: nowrap;
+	}
+	.btn-secondary {
+		display: inline-block;
+		border: 2px solid rgb(var(--black));
+		color: rgb(var(--black));
+		padding: 0.6em 1.5em;
+		border-radius: 4px;
+		text-decoration: none;
+		font-weight: 700;
+		font-size: 0.9rem;
+		letter-spacing: 0.03em;
+		transition: background 0.15s, color 0.15s;
+	}
+	.btn-secondary:hover {
+		background: rgb(var(--black));
+		color: #fff;
+	}
+</style>
