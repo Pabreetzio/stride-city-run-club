@@ -53,15 +53,24 @@
 		}
 	}
 
-	&-sub {
-		font-size: 1.1rem;
-		color: rgba(255, 255, 255, 0.8);
-		max-width: 400px;
-		line-height: 1.6;
+	&-sub-wrap {
+		display: block;
+		width: fit-content;
+		background: rgba(0, 0, 0, 0.4); 
+		border-radius: 12px;
+		padding: 0.85em 1.1em;
 		margin: 0 0 2em;
+		max-width: 440px;
 		opacity: 0;
 		animation: slideFromLeft 1.2s ease-out both;
 		animation-delay: 500ms;
+	}
+
+	&-sub {
+		font-size: 1.1rem;
+		color: rgba(255, 255, 255, 0.9); // ← text opacity (0.0 = invisible · 1.0 = full white)
+		line-height: 1.6;
+		margin: 0;
 	}
 }
 
@@ -80,7 +89,6 @@
 		font-size: 1.05rem;
 		color: rgb(var(--gray-dark));
 		line-height: 1.7;
-		margin: 0;
 	}
 }
 

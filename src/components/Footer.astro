@@ -1,11 +1,57 @@
 ---
+import HeaderLink from './HeaderLink.astro';
 const today = new Date();
 ---
 
 <footer>
 	<div class="footer-inner">
-		<p class="footer-brand">Stride City Run Club</p>
-		<p class="footer-copy">&copy; {today.getFullYear()} Stride City Run Club. All rights reserved.</p>
+
+		<!-- Logo -->
+		<div class="footer-logo-wrap">
+			<img src="/stride-city-logo-7.png" alt="Stride City Run Club" class="footer-logo" />
+		</div>
+
+		<!-- Nav links -->
+		<nav class="footer-nav">
+			<HeaderLink href="/" class="nav-link">Home</HeaderLink>
+			<HeaderLink href="/runs" class="nav-link">Runs</HeaderLink>
+			<HeaderLink href="/blog" class="nav-link">News</HeaderLink>
+			<HeaderLink href="/about" class="nav-link">About</HeaderLink>
+		</nav>
+
+		<!-- Address & Socials -->
+		<div class="footer-info">
+			<div class="footer-address">
+				<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+					<path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0 1 18 0z"></path>
+					<circle cx="12" cy="10" r="3"></circle>
+				</svg>
+				6697 Monroe Rd, Charlotte, NC 28212
+			</div>
+			<div class="footer-socials">
+				<a href="https://www.facebook.com/stridecityrunclub" target="_blank" rel="noopener" aria-label="Stride City on Facebook">
+					<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+						<path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
+					</svg>
+				</a>
+				<a href="https://www.instagram.com/stridecity_run_club/" target="_blank" rel="noopener" aria-label="Stride City on Instagram">
+					<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+						<rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+						<path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+						<line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+					</svg>
+				</a>
+			</div>
+		</div>
+
+	</div>
+
+	<!-- Bottom bar -->
+	<div class="footer-bottom">
+		<div class="footer-bottom-inner">
+			<span>Site by <a href="http://graham.tech" target="_blank" rel="noopener">Patrick Graham</a></span>
+			<span>&copy; {today.getFullYear()} Stride City Run Club</span>
+		</div>
 	</div>
 </footer>
 
@@ -13,24 +59,95 @@ const today = new Date();
 	footer {
 		background: rgb(var(--black));
 		color: rgba(255, 255, 255, 0.6);
-		padding: 2.5em 1.5em;
 		margin-top: 4em;
 	}
+
 	.footer-inner {
 		max-width: 1100px;
 		margin: 0 auto;
-		text-align: center;
+		padding: 3em 1.5em 2.5em;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		gap: 2em;
 	}
-	.footer-brand {
-		font-weight: 700;
-		font-size: 1rem;
-		letter-spacing: 0.05em;
-		text-transform: uppercase;
-		color: #fff;
-		margin: 0 0 0.5em;
+
+	/* Logo */
+	.footer-logo-wrap {
+		display: flex;
+		justify-content: center;
 	}
-	.footer-copy {
-		font-size: 0.85rem;
-		margin: 0;
+	.footer-logo {
+		height: 80px;
+		width: auto;
+		border-radius: 0;
+	}
+
+	/* Nav */
+	.footer-nav {
+		display: flex;
+		gap: 0.25em;
+		flex-wrap: wrap;
+		justify-content: center;
+	}
+
+	/* Address & socials */
+	.footer-info {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		gap: 1em;
+	}
+	.footer-address {
+		display: flex;
+		align-items: center;
+		gap: 0.4em;
+		font-size: 0.8rem;
+		color: rgba(255, 255, 255, 0.5);
+	}
+	.footer-address svg {
+		color: var(--accent);
+		flex-shrink: 0;
+		margin-bottom: 4px;
+	}
+	.footer-socials {
+		display: flex;
+		gap: 1em;
+	}
+	.footer-socials a {
+		display: flex;
+		align-items: center;
+		color: var(--accent);
+		text-decoration: none;
+		transition: opacity 0.15s;
+	}
+	.footer-socials a:hover {
+		opacity: 0.7;
+	}
+
+	/* Bottom bar — matches topbar: accent bg, black text */
+	.footer-bottom {
+		background: var(--accent);
+		padding: 0 1.5em;
+	}
+	.footer-bottom-inner {
+		max-width: 1100px;
+		margin: 0 auto;
+		height: 34px;
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		font-size: 0.72rem;
+		color: rgba(0, 0, 0, 0.75);
+		letter-spacing: 0.03em;
+		line-height: 1;
+	}
+	.footer-bottom-inner a {
+		color: rgba(0, 0, 0, 0.75);
+		text-decoration: none;
+		transition: color 0.15s;
+	}
+	.footer-bottom-inner a:hover {
+		color: rgb(0, 0, 0);
 	}
 </style>

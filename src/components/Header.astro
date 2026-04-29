@@ -28,12 +28,12 @@ import HeaderLink from './HeaderLink.astro';
 			</span>
 		</div>
 		<div class="topbar-social">
-			<a href="https://facebook.com" target="_blank" rel="noopener" aria-label="Stride City on Facebook">
+			<a href="https://www.facebook.com/stridecityrunclub" target="_blank" rel="noopener" aria-label="Stride City on Facebook">
 				<svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
 					<path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
 				</svg>
 			</a>
-			<a href="https://instagram.com" target="_blank" rel="noopener" aria-label="Stride City on Instagram">
+			<a href="https://www.instagram.com/stridecity_run_club/" target="_blank" rel="noopener" aria-label="Stride City on Instagram">
 				<svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
 					<rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
 					<path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
@@ -46,12 +46,14 @@ import HeaderLink from './HeaderLink.astro';
 
 <header>
 	<nav>
-		<a href="/" class="site-title">{SITE_TITLE}</a>
+		<a href="/" class="site-title">
+			<img src="/stride-city-logo-7.png" alt={SITE_TITLE} class="site-logo" />
+		</a>
 		<div class="nav-links">
-			<HeaderLink href="/">Home</HeaderLink>
-			<HeaderLink href="/runs">Runs</HeaderLink>
-			<HeaderLink href="/blog">News</HeaderLink>
-			<HeaderLink href="/about">About</HeaderLink>
+			<HeaderLink href="/" class="nav-link">Home</HeaderLink>
+			<HeaderLink href="/runs" class="nav-link">Runs</HeaderLink>
+			<HeaderLink href="/blog" class="nav-link">News</HeaderLink>
+			<HeaderLink href="/about" class="nav-link">About</HeaderLink>
 		</div>
 	</nav>
 </header>
@@ -59,9 +61,6 @@ import HeaderLink from './HeaderLink.astro';
 
 <style>
 	.header-wrap {
-		position: sticky;
-		top: 0;
-		z-index: 100;
 	}
 
 	/* ── Topbar ── */
@@ -83,6 +82,7 @@ import HeaderLink from './HeaderLink.astro';
 		align-items: center;
 		gap: 0.6em;
 		font-size: 0.72rem;
+		line-height: 1;
 		color: rgba(0, 0, 0, 0.75);
 		letter-spacing: 0.03em;
 	}
@@ -90,6 +90,9 @@ import HeaderLink from './HeaderLink.astro';
 		display: flex;
 		align-items: center;
 		gap: 0.35em;
+	}
+	.topbar-item svg {
+		margin-bottom: 4px;
 	}
 	.topbar-pipe {
 		font-weight: 700;
@@ -104,12 +107,13 @@ import HeaderLink from './HeaderLink.astro';
 	.topbar-social a {
 		display: flex;
 		align-items: center;
-		color: rgba(0, 0, 0, 0.55);
+		line-height: 1;
+		color: rgb(0, 0, 0);
 		text-decoration: none;
-		transition: color 0.15s;
+		transition: opacity 0.15s;
 	}
 	.topbar-social a:hover {
-		color: rgb(var(--black));
+		opacity: 0.65;
 	}
 
 	/* ── Main nav ── */
@@ -127,35 +131,21 @@ import HeaderLink from './HeaderLink.astro';
 		height: 60px;
 	}
 	.site-title {
-		font-family: var(--font-teko);
-		font-size: 1.5rem;
-		font-weight: 600;
-		color: #fff;
+		display: flex;
+		align-items: center;
 		text-decoration: none;
-		letter-spacing: 0.02em;
-		text-transform: uppercase;
 	}
-	.site-title:hover {
-		color: var(--accent);
+	.site-logo {
+		height: 40px;
+		width: auto;
+		display: block;
+	}
+	.site-title:hover .site-logo {
+		opacity: 0.85;
 	}
 	.nav-links {
 		display: flex;
 		gap: 0.25em;
-	}
-	.nav-links :global(a) {
-		font-family: var(--font-teko);
-		padding: 0.5em 0.75em;
-		color: rgba(255, 255, 255, 0.7);
-		border-bottom: none;
-		text-decoration: none;
-		text-transform: uppercase;
-		transition: color 0.15s;
-	}
-	.nav-links :global(a:hover) {
-		color: #fff;
-	}
-	.nav-links :global(a.active) {
-		color: var(--accent);
 	}
 
 	/* ── Responsive ── */
@@ -169,8 +159,8 @@ import HeaderLink from './HeaderLink.astro';
 		.topbar {
 			display: none;
 		}
-		.site-title {
-			font-size: 0.9rem;
+		.site-logo {
+			height: 28px;
 		}
 		.nav-links :global(a) {
 			padding: 0.5em 0.4em;

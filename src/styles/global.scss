@@ -91,6 +91,23 @@ hr {
 	main { padding: 1em; }
 }
 
+// ── Shared nav link ───────────────────────────────────────────────────────────
+
+.nav-link {
+	font-family: var(--font-teko);
+	font-size: 1.05rem;
+	text-transform: uppercase;
+	letter-spacing: 0.05em;
+	color: rgba(255, 255, 255, 0.7);
+	text-decoration: none;
+	padding: 0.4em 0.75em;
+	border-bottom: none;
+	transition: color 0.15s;
+
+	&:hover { color: #fff; }
+	&.active { color: var(--accent); }
+}
+
 // ── Layout utilities ──────────────────────────────────────────────────────────
 
 .container {
