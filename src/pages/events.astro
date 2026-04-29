@@ -1,0 +1,178 @@
+---
+import BaseHead from '../components/BaseHead.astro';
+import Footer from '../components/Footer.astro';
+import Header from '../components/Header.astro';
+import { SITE_TITLE } from '../consts';
+
+const pageTitle = `Events | ${SITE_TITLE}`;
+const pageDescription = 'Upcoming Stride City Run Club events, race meetups, and team outings.';
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<BaseHead title={pageTitle} description={pageDescription} />
+	</head>
+	<body>
+		<Header />
+
+		<main>
+			<section class="events-hero">
+				<div class="container">
+					<p class="eyebrow">Upcoming Events</p>
+					<h1>Run with Stride City</h1>
+					<p class="lede">
+						From weekly miles to race-day meetups, this is where we share the events Stride City Run Club is showing up for together.
+					</p>
+				</div>
+			</section>
+
+			<section class="events-list">
+				<div class="container">
+					<article class="event-card">
+						<div class="event-card-header">
+							<p class="event-kicker">Team Event</p>
+							<h2>Run the South</h2>
+						</div>
+
+						<p>
+							Stride City Run Club will have a team at Run the South. Join the team, race with familiar faces, and celebrate together after the finish.
+						</p>
+
+						<div class="event-details" aria-label="Run the South event details">
+							<div>
+								<span>Date</span>
+								<strong>Coming soon</strong>
+							</div>
+							<div>
+								<span>Location</span>
+								<strong>Coming soon</strong>
+							</div>
+							<div>
+								<span>Club plan</span>
+								<strong>Stride City team meetup</strong>
+							</div>
+						</div>
+
+						<h3>What to expect</h3>
+						<ul>
+							<li>Register for the race and choose Stride City Run Club as your team when available.</li>
+							<li>Watch for club updates with meetup timing, packet pickup notes, and race-day plans.</li>
+							<li>Wear your Stride City gear or bright colors so the team is easy to spot.</li>
+							<li>All paces are welcome. Show up to race, run, walk, cheer, or volunteer.</li>
+						</ul>
+					</article>
+				</div>
+			</section>
+		</main>
+
+		<Footer />
+	</body>
+</html>
+
+<style>
+	.events-hero {
+		padding: 5em 1.5em 4em;
+		background: linear-gradient(135deg, rgba(0, 0, 0, 0.92), rgba(0, 0, 0, 0.72));
+		color: #fff;
+	}
+
+	.events-hero h1 {
+		margin: 0 0 0.35em;
+		font-size: clamp(2.4rem, 6vw, 4rem);
+		line-height: 1;
+		color: #fff;
+	}
+
+	.eyebrow,
+	.event-kicker {
+		margin: 0 0 0.5em;
+		color: var(--accent);
+		font-size: 0.78rem;
+		font-weight: 700;
+		letter-spacing: 0.12em;
+		text-transform: uppercase;
+	}
+
+	.lede {
+		max-width: 680px;
+		margin: 0;
+		font-size: 1.15rem;
+		line-height: 1.7;
+		color: rgba(255, 255, 255, 0.82);
+	}
+
+	.events-list {
+		padding: 4em 1.5em;
+		background: #fff;
+	}
+
+	.event-card {
+		padding: clamp(1.5em, 4vw, 2.5em);
+		border: 1px solid rgb(var(--gray-light));
+		border-radius: 18px;
+		box-shadow: 0 14px 30px rgba(0, 0, 0, 0.08);
+	}
+
+	.event-card-header {
+		margin-bottom: 1em;
+	}
+
+	.event-card h2 {
+		margin: 0;
+		font-size: clamp(2rem, 5vw, 3rem);
+		line-height: 1;
+	}
+
+	.event-card p,
+	.event-card li {
+		font-size: 1.05rem;
+		line-height: 1.7;
+		color: rgb(var(--gray-dark));
+	}
+
+	.event-details {
+		display: grid;
+		grid-template-columns: repeat(3, minmax(0, 1fr));
+		gap: 1em;
+		margin: 2em 0;
+	}
+
+	.event-details div {
+		padding: 1em;
+		border-radius: 14px;
+		background: rgba(0, 0, 0, 0.04);
+	}
+
+	.event-details span {
+		display: block;
+		margin-bottom: 0.3em;
+		font-size: 0.78rem;
+		font-weight: 700;
+		letter-spacing: 0.08em;
+		text-transform: uppercase;
+		color: rgb(var(--gray));
+	}
+
+	.event-details strong {
+		display: block;
+		font-size: 1rem;
+		color: rgb(var(--black));
+	}
+
+	.event-card h3 {
+		margin-top: 1.75em;
+		font-size: 1.35rem;
+	}
+
+	.event-card ul {
+		margin: 0;
+		padding-left: 1.2em;
+	}
+
+	@media (max-width: 720px) {
+		.event-details {
+			grid-template-columns: 1fr;
+		}
+	}
+</style>
