@@ -34,6 +34,13 @@ export default defineConfig({
               ],
           },
       },
+      {
+          provider: fontProviders.google(),
+          name: 'Teko',
+          cssVariable: '--font-teko',
+          fallbacks: ['sans-serif'],
+          weights: [300, 400, 500, 600],
+      },
 	],
 
   adapter: netlify(),
