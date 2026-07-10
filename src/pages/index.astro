@@ -10,6 +10,47 @@ import '../styles/home.scss';
 const recentPosts = (await getCollection('blog'))
 	.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
 	.slice(0, 3);
+
+// Community partners / sponsors. Logos live in /public/sponsors, extracted from
+// the "Sponsors Logo.ai" file Ari sent. Where a partner has a neighborhood
+// location near the club, the link points to that specific spot.
+const sponsors = [
+	{
+		name: 'Edge City Brewery',
+		logo: '/sponsors/edge-city-brewery.png',
+		url: 'https://edgecitybrewery-clt.com/',
+	},
+	{
+		name: 'Move with Ari — Key NC Homes',
+		logo: '/sponsors/move-with-ari.png',
+		url: 'https://www.keynchomes.com/home',
+	},
+	{
+		name: "Hawthorne's NY Pizza & Bar (Old Post Rd)",
+		logo: '/sponsors/hawthornes-pizza.png',
+		url: 'https://order.online/store/hawthorne%27s-ny-pizza-and-bar-charlotte-131770/',
+	},
+	{
+		name: 'East Side Animal Hospital',
+		logo: '/sponsors/east-side-animal-hospital.png',
+		url: 'https://eastsideahclt.com/',
+	},
+	{
+		name: 'Anytime Fitness (Oakhurst)',
+		logo: '/sponsors/anytime-fitness.png',
+		url: 'https://www.anytimefitness.com/locations/charlotte-north-carolina-4913',
+	},
+	{
+		name: 'Monroe Road Advocates (MoRA)',
+		logo: '/sponsors/mora.png',
+		url: 'https://moraclt.org/',
+	},
+	{
+		name: 'Smoothie King (Old Post Rd)',
+		logo: '/sponsors/smoothie-king.png',
+		url: 'https://locations.smoothieking.com/ll/us/nc/charlotte/6215-old-post-road-ste-102/',
+	},
+];
 ---
 
 <!doctype html>
@@ -75,6 +116,30 @@ const recentPosts = (await getCollection('blog'))
 					sign up through our registration page. Explore schedules, volunteering, and upcoming races
 					there. Take your next step toward a healthier, more connected life with us.
 				</p>
+			</div>
+		</section>
+
+		<section class="sponsors">
+			<div class="container">
+				<h2>Our Community Partners</h2>
+				<p class="sponsors-intro">
+					Stride City runs on the support of local businesses and neighbors along Monroe Road.
+					Show them some love the next time you're in the neighborhood.
+				</p>
+				<ul class="sponsor-grid">
+					{sponsors.map((sponsor) => (
+						<li class="sponsor-card">
+							<a
+								href={sponsor.url}
+								target="_blank"
+								rel="noopener sponsored"
+								aria-label={sponsor.name}
+							>
+								<img src={sponsor.logo} alt={`${sponsor.name} logo`} loading="lazy" />
+							</a>
+						</li>
+					))}
+				</ul>
 			</div>
 		</section>
 
