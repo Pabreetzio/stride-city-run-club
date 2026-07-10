@@ -18,6 +18,39 @@ the code alone — captured from what the site owner has mentioned.
   logo). Realtor site: https://www.keynchomes.com/home (Key NC Homes).
   Ari emailed over the sponsor logo artwork.
 
+## Events & races
+
+Races/meetups are an Astro **content collection** (`src/content/events/*.md`),
+schema defined in `src/content.config.ts`. This replaced the old hardcoded
+single-article events page.
+
+**Adding an event:** drop a Markdown file in `src/content/events/`. Key
+frontmatter: `title`, `description`, `date` (drives logic), optional `endDate`
+(multi-day), `dateLabel` (human string shown to visitors), `location`,
+`image` (a path into `src/assets/…`, optimized by `astro:assets`),
+`registerUrl`, `featured` (bool), and an optional `details` array of
+`{label, value}` rows rendered as a stat grid.
+
+**Archiving is automatic — no manual step.** `src/lib/events.ts` splits events
+by date: an event is "past" once the end of its `date` (or `endDate`) day has
+elapsed. Past events drop off the Upcoming list and appear on
+`/events/archive`. So when a race is over it archives itself.
+
+**Homepage "Our Next Team Race" spotlight:** `getFeaturedEvent()` picks the
+upcoming event flagged `featured: true` (falling back to the soonest upcoming
+one). To change what's spotlighted, move the `featured: true` flag to another
+event. Set it on only one at a time.
+
+Pages: `/events` (upcoming + link to archive), `/events/archive` (past),
+`/events/[slug]` (detail, via `src/layouts/EventPost.astro` +
+`src/components/EventCard.astro`).
+
+Current events: `around-the-crown.md` (featured, upcoming — Sep 6 2026) and
+`run-the-south.md` (past — Jun 2026, auto-archived). Note: an older duplicate
+of the Run the South writeup still exists as a blog post
+(`src/content/blog/run-the-south-with-stride-city.md`); the blog/News nav is
+currently hidden.
+
 ## Sponsors / Community Partners
 
 - Source art: `brand-assets/Sponsors Logo.ai` — a single-page Illustrator/PDF

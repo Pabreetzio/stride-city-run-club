@@ -1,0 +1,209 @@
+---
+import { Image } from 'astro:assets';
+import type { CollectionEntry } from 'astro:content';
+import BaseHead from '../components/BaseHead.astro';
+import Footer from '../components/Footer.astro';
+import Header from '../components/Header.astro';
+import { SITE_TITLE } from '../consts';
+
+type Props = CollectionEntry<'events'>['data'] & { isPast: boolean };
+
+const {
+	title,
+	description,
+	dateLabel,
+	location,
+	image,
+	imageAlt,
+	registerUrl,
+	details,
+	isPast,
+} = Astro.props;
+---
+
+<html lang="en">
+	<head>
+		<BaseHead title={`${title} | ${SITE_TITLE}`} description={description} />
+	</head>
+	<body>
+		<Header />
+
+		<main>
+			<article class="event">
+				<a class="back-link" href="/events">&larr; All events</a>
+
+				{isPast && (
+					<p class="past-banner">
+						This is a past event. See what's next on the <a href="/events">events page</a>.
+					</p>
+				)}
+
+				<p class="event-kicker">{isPast ? 'Past Event' : 'Upcoming Race'}</p>
+				<h1>{title}</h1>
+
+				<div class="event-meta">
+					{dateLabel && <span>📅 {dateLabel}</span>}
+					{location && <span>📍 {location}</span>}
+				</div>
+
+				{registerUrl && !isPast && (
+					<a class="btn-primary register" href={registerUrl} target="_blank" rel="noopener">
+						Register for this race
+					</a>
+				)}
+
+				{image && (
+					<div class="event-image">
+						<Image src={image} alt={imageAlt ?? title} width={1040} />
+					</div>
+				)}
+
+				{details && details.length > 0 && (
+					<div class="event-details" aria-label={`${title} details`}>
+						{details.map((row) => (
+							<div>
+								<span>{row.label}</span>
+								<strong>{row.value}</strong>
+							</div>
+						))}
+					</div>
+				)}
+
+				<div class="prose">
+					<slot />
+				</div>
+
+				{registerUrl && !isPast && (
+					<div class="cta-footer">
+						<a class="btn-primary" href={registerUrl} target="_blank" rel="noopener">
+							Register for this race
+						</a>
+					</div>
+				)}
+			</article>
+		</main>
+
+		<Footer />
+	</body>
+</html>
+
+<style>
+	main {
+		width: 820px;
+		max-width: calc(100% - 2em);
+		margin: auto;
+		padding: 3em 1em;
+	}
+
+	.back-link {
+		display: inline-block;
+		margin-bottom: 1.5em;
+		font-size: 0.9rem;
+		font-weight: 700;
+		color: var(--accent-dark);
+		text-decoration: none;
+	}
+	.back-link:hover {
+		text-decoration: underline;
+	}
+
+	.past-banner {
+		margin: 0 0 1.5em;
+		padding: 0.75em 1em;
+		border-radius: 10px;
+		background: rgba(var(--gray), 0.12);
+		color: rgb(var(--gray-dark));
+		font-size: 0.95rem;
+	}
+	.past-banner a {
+		color: var(--accent-dark);
+	}
+
+	.event-kicker {
+		margin: 0 0 0.4em;
+		color: var(--accent-dark);
+		font-size: 0.78rem;
+		font-weight: 700;
+		letter-spacing: 0.12em;
+		text-transform: uppercase;
+	}
+
+	.event h1 {
+		margin: 0 0 0.5em;
+		font-size: clamp(2.2rem, 5vw, 3.4rem);
+		line-height: 1.05;
+	}
+
+	.event-meta {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.5em 1.5em;
+		margin-bottom: 1.25em;
+		color: rgb(var(--gray-dark));
+		font-size: 1rem;
+	}
+
+	.register {
+		margin-bottom: 2em;
+	}
+
+	.event-image {
+		margin: 0 0 2em;
+	}
+	.event-image :global(img) {
+		display: block;
+		width: 100%;
+		height: auto;
+		border-radius: 14px;
+		box-shadow: var(--box-shadow);
+	}
+
+	.event-details {
+		display: grid;
+		grid-template-columns: repeat(3, minmax(0, 1fr));
+		gap: 1em;
+		margin: 0 0 2.5em;
+	}
+	.event-details div {
+		padding: 1em;
+		border-radius: 14px;
+		background: rgba(0, 0, 0, 0.04);
+	}
+	.event-details span {
+		display: block;
+		margin-bottom: 0.3em;
+		font-size: 0.72rem;
+		font-weight: 700;
+		letter-spacing: 0.08em;
+		text-transform: uppercase;
+		color: rgb(var(--gray));
+	}
+	.event-details strong {
+		display: block;
+		font-size: 0.98rem;
+		color: rgb(var(--black));
+	}
+
+	.prose :global(h2) {
+		margin-top: 1.5em;
+		font-size: 1.5rem;
+	}
+	.prose :global(p),
+	.prose :global(li) {
+		font-size: 1.05rem;
+		line-height: 1.7;
+		color: rgb(var(--gray-dark));
+	}
+
+	.cta-footer {
+		margin-top: 2.5em;
+		padding-top: 2em;
+		border-top: 1px solid rgb(var(--gray-light));
+	}
+
+	@media (max-width: 640px) {
+		.event-details {
+			grid-template-columns: 1fr;
+		}
+	}
+</style>

@@ -74,6 +74,106 @@
 	}
 }
 
+// ── Next race spotlight ───────────────────────────────────────────────────────
+
+.next-race {
+	padding: 4em 1.5em;
+	background: rgb(var(--gray-dark));
+	color: #fff;
+}
+
+.next-race-inner {
+	max-width: 1100px;
+	margin: 0 auto;
+	display: grid;
+	grid-template-columns: 1.1fr 1fr;
+	gap: 2.5em;
+	align-items: center;
+}
+
+.next-race-media {
+	display: block;
+	border-radius: 16px;
+	overflow: hidden;
+	box-shadow: 0 18px 40px rgba(0, 0, 0, 0.35);
+
+	img {
+		display: block;
+		width: 100%;
+		height: 100%;
+		max-height: 420px;
+		object-fit: cover;
+		border-radius: 16px;
+		transition: transform 0.3s ease;
+	}
+
+	&:hover img {
+		transform: scale(1.03);
+	}
+}
+
+.next-race-kicker {
+	margin: 0 0 0.6em;
+	color: var(--accent);
+	font-size: 0.8rem;
+	font-weight: 700;
+	letter-spacing: 0.14em;
+	text-transform: uppercase;
+}
+
+.next-race-content h2 {
+	margin: 0 0 0.35em;
+	color: #fff;
+	font-size: clamp(2rem, 4vw, 3rem);
+	line-height: 1.05;
+}
+
+.next-race-date {
+	margin: 0 0 0.2em;
+	font-size: 1.15rem;
+	font-weight: 700;
+	color: var(--accent);
+}
+
+.next-race-location {
+	margin: 0 0 1em;
+	font-size: 0.95rem;
+	color: rgba(255, 255, 255, 0.7);
+}
+
+.next-race-desc {
+	margin: 0 0 1.75em;
+	font-size: 1.05rem;
+	line-height: 1.7;
+	color: rgba(255, 255, 255, 0.85);
+}
+
+.next-race-actions {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.75em;
+
+	.btn-secondary {
+		border-color: #fff;
+		color: #fff;
+
+		&:hover {
+			background: #fff;
+			color: rgb(var(--black));
+		}
+	}
+}
+
+@media (max-width: 760px) {
+	.next-race-inner {
+		grid-template-columns: 1fr;
+		gap: 1.5em;
+	}
+	.next-race-media {
+		order: -1;
+	}
+}
+
 // ── About strip ───────────────────────────────────────────────────────────────
 
 .about-strip {

@@ -1,0 +1,106 @@
+---
+import BaseHead from '../../components/BaseHead.astro';
+import EventCard from '../../components/EventCard.astro';
+import Footer from '../../components/Footer.astro';
+import Header from '../../components/Header.astro';
+import { SITE_TITLE } from '../../consts';
+import { getPastEvents } from '../../lib/events';
+
+const past = await getPastEvents();
+
+const pageTitle = `Past Events | ${SITE_TITLE}`;
+const pageDescription = 'A look back at the races and meetups Stride City Run Club has already run.';
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<BaseHead title={pageTitle} description={pageDescription} />
+	</head>
+	<body>
+		<Header />
+
+		<main>
+			<section class="events-hero">
+				<div class="container">
+					<a class="back-link" href="/events">&larr; Upcoming events</a>
+					<p class="eyebrow">Past Events</p>
+					<h1>Where we've been</h1>
+					<p class="lede">
+						The races and meetups Stride City has already run. Not on the current calendar, but always part of the story.
+					</p>
+				</div>
+			</section>
+
+			<section class="events-list">
+				<div class="container">
+					{past.length > 0 ? (
+						<div class="event-grid">
+							{past.map((event) => (
+								<EventCard event={event} past />
+							))}
+						</div>
+					) : (
+						<p class="empty">No past events yet — the archive fills up as races wrap.</p>
+					)}
+				</div>
+			</section>
+		</main>
+
+		<Footer />
+	</body>
+</html>
+
+<style>
+	.events-hero {
+		padding: 4em 1.5em 3.5em;
+		background: linear-gradient(135deg, rgba(0, 0, 0, 0.92), rgba(0, 0, 0, 0.72));
+		color: #fff;
+	}
+	.back-link {
+		display: inline-block;
+		margin-bottom: 1.25em;
+		font-size: 0.9rem;
+		font-weight: 700;
+		color: var(--accent);
+		text-decoration: none;
+	}
+	.back-link:hover {
+		text-decoration: underline;
+	}
+	.events-hero h1 {
+		margin: 0 0 0.35em;
+		font-size: clamp(2.2rem, 6vw, 3.6rem);
+		line-height: 1;
+		color: #fff;
+	}
+	.eyebrow {
+		margin: 0 0 0.5em;
+		color: var(--accent);
+		font-size: 0.78rem;
+		font-weight: 700;
+		letter-spacing: 0.12em;
+		text-transform: uppercase;
+	}
+	.lede {
+		max-width: 680px;
+		margin: 0;
+		font-size: 1.1rem;
+		line-height: 1.7;
+		color: rgba(255, 255, 255, 0.82);
+	}
+
+	.events-list {
+		padding: 4em 1.5em;
+		background: #fff;
+	}
+	.event-grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+		gap: 1.5em;
+	}
+	.empty {
+		font-size: 1.05rem;
+		color: rgb(var(--gray-dark));
+	}
+</style>

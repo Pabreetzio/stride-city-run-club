@@ -1,15 +1,20 @@
 ---
+import { Image } from 'astro:assets';
 import { getCollection } from 'astro:content';
 import BaseHead from '../components/BaseHead.astro';
 import Footer from '../components/Footer.astro';
 import FormattedDate from '../components/FormattedDate.astro';
 import Header from '../components/Header.astro';
 import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
+import { getFeaturedEvent } from '../lib/events';
 import '../styles/home.scss';
 
 const recentPosts = (await getCollection('blog'))
 	.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
 	.slice(0, 3);
+
+// The next race to spotlight (featured upcoming event, else soonest upcoming).
+const nextRace = await getFeaturedEvent();
 
 // Community partners / sponsors. Logos live in /public/sponsors, extracted from
 // the "Sponsors Logo.ai" file Ari sent. Where a partner has a neighborhood
@@ -72,6 +77,47 @@ const sponsors = [
 				{/* <a href="/runs" class="btn-primary">See Upcoming Runs</a> */}
 			</div>
 		</section>
+
+		{nextRace && (
+			<section class="next-race">
+				<div class="next-race-inner">
+					{nextRace.data.image && (
+						<a href={`/events/${nextRace.id}`} class="next-race-media">
+							<Image
+								src={nextRace.data.image}
+								alt={nextRace.data.imageAlt ?? nextRace.data.title}
+								width={720}
+								height={540}
+							/>
+						</a>
+					)}
+					<div class="next-race-content">
+						<p class="next-race-kicker">Our Next Team Race</p>
+						<h2>{nextRace.data.title}</h2>
+						{nextRace.data.dateLabel && (
+							<p class="next-race-date">{nextRace.data.dateLabel}</p>
+						)}
+						{nextRace.data.location && (
+							<p class="next-race-location">{nextRace.data.location}</p>
+						)}
+						<p class="next-race-desc">{nextRace.data.description}</p>
+						<div class="next-race-actions">
+							<a href={`/events/${nextRace.id}`} class="btn-primary">Race details</a>
+							{nextRace.data.registerUrl && (
+								<a
+									href={nextRace.data.registerUrl}
+									class="btn-secondary"
+									target="_blank"
+									rel="noopener"
+								>
+									Register
+								</a>
+							)}
+						</div>
+					</div>
+				</div>
+			</section>
+		)}
 
 		<section class="about-strip">
 			<div class="container">
