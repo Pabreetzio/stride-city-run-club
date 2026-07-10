@@ -45,11 +45,21 @@ Pages: `/events` (upcoming + link to archive), `/events/archive` (past),
 `/events/[slug]` (detail, via `src/layouts/EventPost.astro` +
 `src/components/EventCard.astro`).
 
-Current events: `around-the-crown.md` (featured, upcoming — Sep 6 2026) and
-`run-the-south.md` (past — Jun 2026, auto-archived). Note: an older duplicate
-of the Run the South writeup still exists as a blog post
-(`src/content/blog/run-the-south-with-stride-city.md`); the blog/News nav is
-currently hidden.
+Current events:
+- `around-the-crown.md` — featured, upcoming (Sep 6 2026). Image is a 2023
+  Around the Crown team photo (`src/assets/races/around-the-crown.jpg`).
+- `run-jen-run.md` — past (Mar 21 2026, auto-archived). Go Jen Go breast-cancer
+  benefit 5K at Symphony Park. Image `src/assets/races/run-jen-run.jpg` is the
+  team-with-medals photo (originally "Photo Apr 14 2026").
+- `run-the-south.md` — past (Jun 2026, auto-archived), no image.
+
+Race photos live in `src/assets/races/` so `astro:assets` optimizes them; pass
+`<Image>` a `width` only (no height) so portrait/landscape source aspect is
+preserved and CSS `object-fit: cover` handles cropping.
+
+Note: an older duplicate of the Run the South writeup still exists as a blog
+post (`src/content/blog/run-the-south-with-stride-city.md`); the blog/News nav
+is currently hidden.
 
 ## Sponsors / Community Partners
 

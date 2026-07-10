@@ -5,7 +5,7 @@ date: 2026-09-06T07:30:00
 dateLabel: 'Sunday, September 6, 2026 · 7:30 AM'
 location: 'Truist Field, Uptown Charlotte, NC'
 image: '../../assets/races/around-the-crown.jpg'
-imageAlt: 'Stride City Run Club members together after a Wednesday night run'
+imageAlt: 'Stride City Run Club members in Around the Crown shirts with race bibs, Charlotte skyline behind them'
 registerUrl: 'https://aroundthecrown10k.raceroster.com/'
 featured: true
 details:
