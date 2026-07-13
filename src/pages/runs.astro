@@ -2,30 +2,133 @@
 import BaseHead from '../components/BaseHead.astro';
 import Footer from '../components/Footer.astro';
 import Header from '../components/Header.astro';
+
+const ROUTE_URL = 'https://www.strava.com/routes/3213882408020758548';
+const CLUB_URL = 'https://www.strava.com/clubs/1236928';
 ---
 
 <!doctype html>
 <html lang="en">
 	<head>
-		<BaseHead title="Upcoming Runs — Stride City Run Club" description="Find our next group run." />
+		<BaseHead
+			title="Our Route — Stride City Run Club"
+			description="The two-mile loop we run every Wednesday night, straight from Strava."
+		/>
 	</head>
 	<body>
 		<Header />
 		<main>
-			<h1>Upcoming Runs</h1>
-			<p>Run schedule coming soon. Check back here for dates, times, and meeting spots.</p>
+			<p class="kicker">Weekly Run</p>
+			<h1>Our Route</h1>
+			<p class="lead">
+				Every Wednesday at 6:30pm we meet at Edge City Brewery and run this two-mile loop
+				together. All ages and paces welcome — walk it or run it. Here's the route:
+			</p>
+
+			<div class="route-embed">
+				<div
+					class="strava-embed-placeholder"
+					data-embed-type="route"
+					data-embed-id="3213882408020758548"
+					data-full-width="true"
+					data-style="standard"
+					data-map-hash="13.82/35.17685/-80.76152"
+					data-from-embed="true"
+					data-token="0tHHyYsiriWi3GxpiWs167e7mgRYCzyUbja_PNlA3sw"
+				>
+				</div>
+			</div>
+
+			<div class="route-actions">
+				<a href={CLUB_URL} class="btn-primary" target="_blank" rel="noopener">
+					Join our club on Strava
+				</a>
+				<a href={ROUTE_URL} class="btn-secondary" target="_blank" rel="noopener">
+					View route on Strava
+					<span class="btn-note">requires login</span>
+				</a>
+			</div>
 		</main>
 		<Footer />
+
+		<script is:inline async src="https://strava-embeds.com/embed.js"></script>
 	</body>
 </html>
 
 <style>
 	main {
-		max-width: 700px;
+		/* Global `main` sets width: 720px; override it so the page stays
+		   responsive while still allowing a wider max for the map. */
+		width: 100%;
+		max-width: 860px;
+		box-sizing: border-box;
 		margin: 0 auto;
-		padding: 4em 1.5em;
+		padding: 3.5em 1.5em;
+	}
+	.kicker {
+		text-transform: uppercase;
+		letter-spacing: 0.12em;
+		font-size: 0.8rem;
+		font-weight: 700;
+		color: var(--accent-dark);
+		margin-bottom: 0.4em;
 	}
 	h1 {
-		margin-bottom: 0.75em;
+		margin-bottom: 0.4em;
+	}
+	.lead {
+		font-size: 1.1rem;
+		max-width: 640px;
+		margin-bottom: 1.75em;
+	}
+
+	.route-embed {
+		border-radius: 12px;
+		overflow: hidden;
+		box-shadow: var(--box-shadow);
+		margin-bottom: 2em;
+		/* Reserve height so the layout doesn't jump before the embed loads. */
+		min-height: 480px;
+	}
+	.route-embed :global(iframe) {
+		display: block;
+		width: 100%;
+		border: 0;
+	}
+
+	.route-actions {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		gap: 0.75em;
+	}
+	/* Emphasize joining the club — the primary call to action. */
+	.route-actions .btn-primary {
+		padding: 0.9em 2.25em;
+		font-size: 1.05rem;
+	}
+	.route-actions .btn-secondary {
+		display: inline-flex;
+		align-items: baseline;
+		gap: 0.5em;
+	}
+	.btn-note {
+		font-weight: 400;
+		font-size: 0.75rem;
+		letter-spacing: 0.02em;
+		opacity: 0.7;
+		text-transform: none;
+	}
+
+	@media (max-width: 480px) {
+		.route-embed {
+			min-height: 420px;
+		}
+		.route-actions {
+			flex-direction: column;
+		}
+		.route-actions :global(a) {
+			text-align: center;
+		}
 	}
 </style>
