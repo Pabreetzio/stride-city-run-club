@@ -7,7 +7,7 @@ location: 'Truist Field, Uptown Charlotte, NC'
 image: '../../assets/races/around-the-crown.jpg'
 imageAlt: 'Stride City Run Club members in Around the Crown shirts with race bibs, Charlotte skyline behind them'
 registerUrl: 'https://aroundthecrown10k.raceroster.com/'
-featured: true
+featured: false
 details:
   - label: 'Distance'
     value: '10K (6.2 miles)'
