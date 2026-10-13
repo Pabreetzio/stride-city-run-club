@@ -35,7 +35,9 @@ const events = defineCollection({
 			image: z.optional(image()),
 			imageAlt: z.string().optional(),
 			registerUrl: z.string().url().optional(),
-			// Set true on the one race you want spotlighted on the homepage.
+			// Labels are flexible: new event kinds can be added without changing templates.
+			category: z.string().optional(),
+			// Legacy field; the homepage now displays all upcoming events.
 			featured: z.boolean().default(false),
 			// Optional key/value rows rendered as a details grid on the event page.
 			details: z.array(z.object({ label: z.string(), value: z.string() })).optional(),
