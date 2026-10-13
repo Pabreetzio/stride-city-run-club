@@ -31,10 +31,10 @@ frontmatter: `title`, `description`, `date` (drives logic), optional `endDate`
 `registerUrl`, `featured` (bool), and an optional `details` array of
 `{label, value}` rows rendered as a stat grid.
 
-**Archiving is automatic — no manual step.** `src/lib/events.ts` splits events
+**Archiving is date-driven — preserve the event file, don't delete or move it.** `src/lib/events.ts` splits events
 by date: an event is "past" once the end of its `date` (or `endDate`) day has
 elapsed. Past events drop off the Upcoming list and appear on
-`/events/archive`. So when a race is over it archives itself.
+`/events/archive`. After a fresh build/deploy, elapsed events appear in the archive; this Astro site is statically generated, so dates do not cause already-deployed HTML to refresh by themselves. Trigger a fresh deployment if past events are still showing as upcoming.
 
 **Homepage "Our Next Team Race" spotlight:** `getFeaturedEvent()` picks the
 upcoming event flagged `featured: true` (falling back to the soonest upcoming
@@ -45,8 +45,18 @@ Pages: `/events` (upcoming + link to archive), `/events/archive` (past),
 `/events/[slug]` (detail, via `src/layouts/EventPost.astro` +
 `src/components/EventCard.astro`).
 
+Event publishing workflow:
+1. Confirm date, exact start time, venue address, packet-pickup and registration with the organizer's official site; prefer its registration URL over a generic landing page. Do not guess missing details. Specify time zone when ambiguity exists.
+2. Add one `src/content/events/<event-slug>.md` per event, even when several events share a date. The `date` timestamp should represent the main event's start, for chronological ordering; use `dateLabel` to show multiple starts and secondary activity times. Cross-link same-day events where helpful.
+3. Set `featured: true` on the one upcoming event to spotlight on the homepage; remove the flag from old events as appropriate. New events without images work with existing event cards and homepage section.
+4. Preserve completed event Markdown as historical content; check `/events/archive` after the next deployment. For a real recap, edit the existing past event's body with verified results/photos, avoiding unsubstantiated claims.
+5. Run `npm run build`, deploy, and verify `/events`, `/events/archive`, and both detail pages; on a static site the build time determines upcoming/past classification. A further deployment after race day refreshes classification.
+
 Current events:
-- `around-the-crown.md` — featured, upcoming (Sep 6 2026). Image is a 2023
+- `ctc-5k-showdown-2026.md` — upcoming Oct 17, 2026 morning 9 AM; featured homepage race.
+- `out-of-the-ashes-2026.md` — upcoming Oct 17, 2026 evening 5 PM 5K / 5:45 PM remembrance walk.
+- `donut-run-2026-10-02.md` — past Oct 2 donut run; archived automatically on rebuild; keep file and details.
+- `around-the-crown.md` — past (Sep 6 2026). Image is a 2023
   Around the Crown team photo (`src/assets/races/around-the-crown.jpg`).
 - `run-jen-run.md` — past (Mar 21 2026, auto-archived). Go Jen Go breast-cancer
   benefit 5K at Symphony Park. Image `src/assets/races/run-jen-run.jpg` is the
