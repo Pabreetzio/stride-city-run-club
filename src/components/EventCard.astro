@@ -8,7 +8,8 @@ type Props = {
 };
 
 const { event, past = false } = Astro.props;
-const { title, description, dateLabel, location, image, imageAlt } = event.data;
+const { title, description, dateLabel, location, image, imageAlt, category } = event.data;
+const kind = category?.trim() || 'Event';
 const href = `/events/${event.id}`;
 ---
 
@@ -20,14 +21,14 @@ const href = `/events/${event.id}`;
 			</div>
 		)}
 		<div class="event-card-body">
-			<p class="event-card-kicker">{past ? 'Past Event' : 'Upcoming Race'}</p>
+			<p class="event-card-kicker">{past ? `Past ${kind}` : kind}</p>
 			<h3>{title}</h3>
 			<p class="event-card-meta">
 				{dateLabel && <span>{dateLabel}</span>}
 				{location && <span>{location}</span>}
 			</p>
 			<p class="event-card-desc">{description}</p>
-			<span class="event-card-cta">{past ? 'View recap' : 'View race details'} &rarr;</span>
+			<span class="event-card-cta">{past ? 'Event details' : 'View details'} &rarr;</span>
 		</div>
 	</a>
 </article>
