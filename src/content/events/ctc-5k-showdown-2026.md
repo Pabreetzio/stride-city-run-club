@@ -1,11 +1,11 @@
 ---
 title: 'CTC 5K Showdown'
+category: 'Race'
 description: 'Represent your run club at the Charlotte Track Club 5K Showdown, a team-scored race at Frank Liske Park in Concord.'
 date: 2026-10-17T09:00:00
 dateLabel: 'Saturday, October 17, 2026 · 9:00 AM'
 location: 'Frank Liske Park, 4001 Stough Rd, Concord, NC 28027'
 registerUrl: 'https://www.simplyregister.net/register/?e=129676'
-featured: true
 details:
   - label: 'Distance'
     value: '5K (3.1 miles)'
