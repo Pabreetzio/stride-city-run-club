@@ -1,5 +1,6 @@
 ---
 title: 'Out of the Ashes 5K & Remembrance Walk'
+category: 'Race & Walk'
 description: 'An evening competitive 5K and remembrance walk at East City Church supporting families affected by pregnancy loss, infant loss, and infertility.'
 date: 2026-10-17T17:00:00
 dateLabel: 'Saturday, October 17, 2026 · 5:00 PM 5K / 5:45 PM walk'
